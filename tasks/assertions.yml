@@ -1,0 +1,16 @@
+---
+- name: assertion - ansible version
+  assert:
+    that:
+      - 'ansible_version.major == 2'
+      - 'ansible_version.minor == 7'
+    msg: 'Unsupported Ansible version. Please use Ansible v2.7'
+  delegate_to: localhost
+  run_once: true
+
+
+- name: assertion - operative system
+  assert:
+    that:
+      - 'ansible_distribution_version is version("18.04", "==")'
+    msg: 'Unsupported operative system. Please use Ubuntu 18.04'

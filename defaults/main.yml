@@ -1,1 +1,4 @@
 ---
+libvirt__packages:
+  - "libvirt-bin"
+  - "qemu"

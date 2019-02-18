@@ -1,1 +1,6 @@
 ---
+- import_tasks: assertions.yml
+  tags: "libvirt-assertions"
+
+- import_tasks: install.yml
+  tags: "libvirt-install"

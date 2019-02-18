@@ -17,8 +17,9 @@ None
 ## Variables
 Variables are prefixed by `libvirt__`
 
-| Variable | Choices | Default | Description |
-| -------- | ------- | ------- | ----------- |
+| Variable   | Choices | Default                  | Description         |
+| ---------- | ------- | ------------------------ | ------------------- |
+| `packages` |         | `["libvirt-bin","qemu"]` | Packages to install |
 
 
 ## License
