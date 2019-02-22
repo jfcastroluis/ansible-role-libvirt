@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dependencies task
 - Pools task
 
+### Changed
+- Volumes now can be downloaded from an URL
+
 
 ## 1.0.0
 ### Added

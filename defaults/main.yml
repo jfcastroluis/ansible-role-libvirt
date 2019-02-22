@@ -20,7 +20,9 @@ libvirt__pools: []
 libvirt_volumes: []
   # - name: "string"                 # volume name
   #   size: "integer"                # volume size (in GB)
-  #   directory:                     # target directory of volume
+  #   directory: "string"            # target directory of volume
+  #   url: "string"                  # (optional) URL to download the volume
+                                     #   - if defined, "size" is ignored
   #   state: ("present" | "absent")  # volume state:
                                      #   - "present" (default): create the volume
                                      #   - "absent": delete the volume

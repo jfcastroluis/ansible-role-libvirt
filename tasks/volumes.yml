@@ -1,11 +1,21 @@
 ---
-- name: volumes - present
+- name: volumes - present (download)
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.directory }}/{{ item.name }}.qcow2"
+  when: item.state|default("present") == "present" and
+        item.url is defined
+  loop: "{{ libvirt__volumes }}"
+
+
+- name: volumes - present (create)
   shell: >
     qemu-img create -f qcow2 {{ item.name }}.qcow2 {{ item.size }}G
   args:
     chdir: "{{ item.directory }}"
     creates: "{{ item.directory }}/{{ item.name }}.qcow2"
-  when: item.state|default("present") == "present"
+  when: item.state|default("present") == "present" and
+        item.url is not defined
   loop: "{{ libvirt__volumes }}"
 
 
