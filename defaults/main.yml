@@ -22,7 +22,8 @@ libvirt_volumes: []
   #   size: "integer"                # volume size (in GB)
   #   directory: "string"            # target directory of volume
   #   url: "string"                  # (optional) URL to download the volume
-                                     #   - if defined, "size" is ignored
+                                     #   - if defined, "size" and "backing" are ignored
+  #   backing: "string"              # (optional) backing volume
   #   state: ("present" | "absent")  # volume state:
                                      #   - "present" (default): create the volume
                                      #   - "absent": delete the volume

@@ -8,14 +8,27 @@
   loop: "{{ libvirt__volumes }}"
 
 
-- name: volumes - present (create)
+- name: volumes - present (empty)
   shell: >
     qemu-img create -f qcow2 {{ item.name }}.qcow2 {{ item.size }}G
   args:
     chdir: "{{ item.directory }}"
     creates: "{{ item.directory }}/{{ item.name }}.qcow2"
   when: item.state|default("present") == "present" and
-        item.url is not defined
+        item.url is not defined and
+        item.backing is not defined
+  loop: "{{ libvirt__volumes }}"
+
+
+- name: volumes - present (backing)
+  shell: >
+    qemu-img create -f qcow2 -b {{ item.backing }} {{ item.name }}.qcow2 {{ item.size }}G
+  args:
+    chdir: "{{ item.directory }}"
+    creates: "{{ item.directory }}/{{ item.name }}.qcow2"
+  when: item.state|default("present") == "present" and
+        item.url is not defined and
+        item.backing is defined
   loop: "{{ libvirt__volumes }}"
 
 

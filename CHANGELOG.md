@@ -12,7 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pools task
 
 ### Changed
-- Volumes now can be downloaded from an URL
+- Volumes can be created with a backing volume
+- Volumes can be downloaded from an URL
 
 
 ## 1.0.0
