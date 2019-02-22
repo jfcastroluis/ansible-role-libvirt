@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Volumes can be created with a backing volume
 - Volumes can be downloaded from an URL
 
+### Fixed
+- Right default variable name `libvirt__volumes` in defaults
+
 
 ## 1.0.0
 ### Added

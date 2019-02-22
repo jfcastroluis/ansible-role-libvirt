@@ -17,7 +17,7 @@ libvirt__pools: []
                                     #   - "absent": inactive and undefine the pool
                                     #               not delete directory
 
-libvirt_volumes: []
+libvirt__volumes: []
   # - name: "string"                 # volume name
   #   size: "integer"                # volume size (in GB)
   #   directory: "string"            # target directory of volume
