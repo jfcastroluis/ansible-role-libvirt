@@ -2,3 +2,17 @@
 libvirt__packages:
   - "libvirt-bin"
   - "qemu"
+
+
+libvirt__dependencies:
+  - "python3-libvirt"
+  - "python3-lxml"
+
+
+libvirt__pools: []
+  #- name: "string"                 # pool name
+  #  directory: "string"            # target directory
+  #  state: ("present" | "absent")  # state
+                                    #   - "present": define, build, active and autostart the pool
+                                    #   - "absent": inactive and undefine the pool
+                                    #               not delete directory

@@ -4,3 +4,9 @@
 
 - import_tasks: install.yml
   tags: "libvirt-install"
+
+- import_tasks: dependencies.yml
+  tags: "libvirt-dependencies"
+
+- import_tasks: pools.yml
+  tags: "libvirt-pools"

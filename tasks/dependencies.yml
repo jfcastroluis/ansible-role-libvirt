@@ -1,0 +1,4 @@
+---
+- name: dependencies
+  apt:
+    name: "{{ libvirt__dependencies }}"

@@ -1,0 +1,52 @@
+---
+- name: pools - present (define)
+  virt_pool:
+    name: "{{ item.name }}"
+    command: define
+    xml: "{{ lookup('template', 'libvirt_pool.xml.j2') }}"
+  when: item.state|default("present") == "present"
+  loop: "{{ libvirt__pools }}"
+  register: libvirt__pools_define
+
+
+- name: pools - present (build)
+# No idempotent so we need do it only on pools defined in previous task
+  virt_pool:
+    name: "{{ item.item.name }}"
+    command: build
+    mode: new
+  when: item.state|default("present") == "present" and
+        item.changed
+  loop: "{{ libvirt__pools_define.results }}"
+
+
+- name: pools - present (active)
+  virt_pool:
+    name: "{{ item.name }}"
+    state: active
+  when: item.state|default("present") == "present"
+  loop: "{{ libvirt__pools }}"
+
+
+- name: pools - present (autostart)
+  virt_pool:
+    name: "{{ item.name }}"
+    autostart: yes
+  when: item.state|default("present") == "present"
+  loop: "{{ libvirt__pools }}"
+
+
+- name: pools - absent (inactive)
+  virt_pool:
+    name: "{{ item.name }}"
+    state: inactive
+  when: item.state|default("present") == "absent"
+  loop: "{{ libvirt__pools }}"
+
+
+- name: pools - absent (undefine)
+  virt_pool:
+    name: "{{ item.name }}"
+    state: undefined
+  when: item.state|default("present") == "absent"
+  loop: "{{ libvirt__pools }}"
