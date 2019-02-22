@@ -1,0 +1,17 @@
+---
+- name: volumes - present
+  shell: >
+    qemu-img create -f qcow2 {{ item.name }}.qcow2 {{ item.size }}G
+  args:
+    chdir: "{{ item.directory }}"
+    creates: "{{ item.directory }}/{{ item.name }}.qcow2"
+  when: item.state|default("present") == "present"
+  loop: "{{ libvirt__volumes }}"
+
+
+- name: volumes - absent
+  file:
+    path: "{{ item.directory }}/{{ item.name }}.qcow2"
+    state: absent
+  when: item.state|default("present") == "absent"
+  loop: "{{ libvirt__volumes }}"

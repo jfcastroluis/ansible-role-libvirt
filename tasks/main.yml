@@ -10,3 +10,6 @@
 
 - import_tasks: pools.yml
   tags: "libvirt-pools"
+
+- import_tasks: volumes.yml
+  tags: "libvirt-volumes"

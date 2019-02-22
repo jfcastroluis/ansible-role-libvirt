@@ -16,3 +16,11 @@ libvirt__pools: []
                                     #   - "present": define, build, active and autostart the pool
                                     #   - "absent": inactive and undefine the pool
                                     #               not delete directory
+
+libvirt_volumes: []
+  # - name: "string"                 # volume name
+  #   size: "integer"                # volume size (in GB)
+  #   directory:                     # target directory of volume
+  #   state: ("present" | "absent")  # volume state:
+                                     #   - "present" (default): create the volume
+                                     #   - "absent": delete the volume
