@@ -17,12 +17,12 @@ None
 ## Variables
 Variables are prefixed by `libvirt__`
 
-| Variable       | Choices | Default                            | Description            |
-| -------------- | ------- | ---------------------------------- | ---------------------- |
-| `packages`     |         | `["libvirt-bin","qemu"]`           | Packages to install    |
-| `dependencies` |         | `["python3-libvirt","python3-lxml" | Packages need for role |
-|                |         |                                    |                        |
-| `pools`        | See [defaults](defaults/main.yml)  | `[]`    | Pools to be managed    |
+| Variable       | Choices | Default                              | Description            |
+| -------------- | ------- | ------------------------------------ | ---------------------- |
+| `packages`     |         | `["libvirt-bin","qemu"]`             | Packages to install    |
+| `dependencies` |         | `["python3-libvirt","python3-lxml"]` | Packages need for role |
+|                |         |                                      |                        |
+| `pools`        | See [defaults](defaults/main.yml)  | `[]`      | Pools to be managed    |
 
 
 
