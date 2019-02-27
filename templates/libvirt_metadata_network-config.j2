@@ -1,0 +1,25 @@
+{% if item.item.network_config is defined and item.item.network_config != None %}
+version: 2
+{% if item.item.network_config.ethernets is defined and item.item.network_config.ethernets != None %}
+ethernets:
+{% for ethernet in item.item.network_config.ethernets %}
+  {{ ethernet.name }}:
+    match:
+      name: {{ ethernet.name }}
+    addresses:
+      - {{ ethernet.cidr }}
+{% if ethernet.gateway is defined and ethernet.gateway != None %}
+    gateway4: {{ ethernet.gateway }}
+{% endif %}
+{% if ethernet.nameservers is defined and ethernet.nameservers != None %}
+    nameservers:
+      addresses:
+{% for nameserver in ethernet.nameservers %}
+        - {{ nameserver }}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% else %}
+config: disabled
+{% endif %}

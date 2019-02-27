@@ -13,3 +13,6 @@
 
 - import_tasks: volumes.yml
   tags: "libvirt-volumes"
+
+- import_tasks: metadatas.yml
+  tags: "libvirt-metadatas"

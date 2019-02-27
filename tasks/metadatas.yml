@@ -1,0 +1,53 @@
+---
+- name: metadatas - present (stat)
+  stat:
+    path: "{{ item.directory }}/{{ item.name }}-metadata.iso"
+  when: item.state|default("present") == "present"
+  loop: "{{ libvirt__metadatas }}"
+  register: libvirt__metadatas_stat
+
+
+- name: metadatas - present (user-data)
+  template:
+    src: "libvirt_metadata_user-data.j2"
+    dest: "{{ item.item.directory }}/{{ item.item.name }}_user-data"
+  when: item.item.state|default("present") == "present" and
+        not item.stat.exists
+  loop: "{{ libvirt__metadatas_stat.results }}"
+
+
+- name: metadatas - present (meta-data)
+  template:
+    src: "libvirt_metadata_meta-data.j2"
+    dest: "{{ item.item.directory }}/{{ item.item.name }}_meta-data"
+  when: item.item.state|default("present") == "present" and
+        not item.stat.exists
+  loop: "{{ libvirt__metadatas_stat.results }}"
+
+
+- name: metadatas - present (network-config)
+  template:
+    src: "libvirt_metadata_network-config.j2"
+    dest: "{{ item.item.directory }}/{{ item.item.name }}_network-config"
+  when: item.item.state|default("present") == "present" and
+        not item.stat.exists
+  loop: "{{ libvirt__metadatas_stat.results }}"
+
+
+- name: metadatas - present (genisoimage)
+  shell: >
+    mv {{ item.item.name }}_user-data user-data && mv {{ item.item.name }}_meta-data meta-data && mv {{ item.item.name }}_network-config network-config && genisoimage -o {{ item.item.directory }}/{{ item.item.name }}-metadata.iso -V cidata -r -J user-data meta-data network-config && rm user-data meta-data network-config
+  args:
+    chdir: "{{ item.item.directory }}"
+    creates: "{{ item.item.directory }}/{{ item.item.name }}-metadata.iso"
+  when: item.item.state|default("present") == "present" and
+        not item.stat.exists
+  loop: "{{ libvirt__metadatas_stat.results }}"
+
+
+- name: metadatas - absent
+  file:
+    path: "{{ item.directory }}/{{ item.name }}-metadata.iso"
+    state: absent
+  when: item.state|default("present") == "absent"
+  loop: "{{ libvirt__metadatas }}"

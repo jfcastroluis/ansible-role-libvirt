@@ -1,0 +1,18 @@
+#cloud-config
+{% if item.item.user_data is defined and item.item.user_data != None %}
+system_info:
+  default_user:
+    name: {{ item.item.user_data.username|default(lookup("env","USER")) }}
+{% if item.item.user_data.password is defined and item.item.user_data.password != None %}
+chpasswd:
+  list: |
+    {{ item.item.user_data.username|default(lookup("env","USER")) }}:{{ item.item.user_data.password }}
+  expire: false
+{% endif %}
+timezone: {{ item.item.user_data.timezone|default("Europe/Madrid") }}
+{% else %}
+system_info:
+  default_user:
+    name: {{ lookup("env","USER") }}
+timezone: Europe/Madrid
+{% endif %}

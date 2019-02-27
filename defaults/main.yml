@@ -2,6 +2,7 @@
 libvirt__packages:
   - "libvirt-bin"
   - "qemu"
+  - "genisoimage"
 
 
 libvirt__dependencies:
@@ -17,6 +18,7 @@ libvirt__pools: []
                                     #   - "absent": inactive and undefine the pool
                                     #               not delete directory
 
+
 libvirt__volumes: []
   # - name: "string"                 # volume name
   #   size: "integer"                # volume size (in GB)
@@ -27,3 +29,25 @@ libvirt__volumes: []
   #   state: ("present" | "absent")  # volume state:
                                      #   - "present" (default): create the volume
                                      #   - "absent": delete the volume
+
+
+libvirt__metadatas: []
+  # - name: "string"    
+  #   directory: "string"
+  #   user_data:            # (optional)
+  #     username: "string"  # (default: $USER)
+  #     password: "string"  # (optional)
+  #     timezone: "string"  # (default: Europe/Madrid)
+  #   meta_data:                 # (optional)
+  #     instance_id: "string"    # (default: "name")
+  #     hostname: "string"       # (default: "name")
+  #     public_keys: []          # (optional) list of public keys
+  #   network_config:          # (optional)
+  #     ethernets:             # (optional) ethernets list
+  #       - name: "string"     # ethernet name
+  #         cird: "string"     # cidr assigned to the ethernet
+  #         gateway: "string"  # (optional) gateway for the ethernet
+  #         nameservers: []    # (optional) nameservers list
+  #   state: ("present" | "absent") # metadata state:
+                                    #   - "present" (default): create metadata file
+                                    #   - "absent": delete metadata file

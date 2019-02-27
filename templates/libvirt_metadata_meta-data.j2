@@ -1,0 +1,13 @@
+{% if item.item.meta_data is defined and item.item.meta_data != None %}
+instance-id: {{ item.item.meta_data.instance_id|default(item.item.name) }}
+local-hostname: {{ item.item.meta_data.hostname|default(item.item.name) }}
+{% if item.item.meta_data.public_keys is defined and item.item.meta_data.public_keys != None %}
+public-keys:
+{% for key in item.item.meta_data.public_keys %}
+  - {{ key }}
+{% endfor %}
+{% endif %}
+{% else %}
+instance-id: {{ item.item.name }}
+local-hostname: {{ item.item.name }}
+{% endif %}
