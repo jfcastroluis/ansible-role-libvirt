@@ -19,3 +19,6 @@
 
 - import_tasks: networks.yml
   tags: "libvirt-networks"
+
+- import_tasks: domains.yml
+  tags: "libvirt-domains"

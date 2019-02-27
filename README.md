@@ -26,6 +26,7 @@ Variables are prefixed by `libvirt__`
 | `volumes`      | See [defaults](defaults/main.yml)  | `[]`      | Volumes to be managed   |
 | `metadatas`    | See [defaults](defaults/main.yml)  | `[]`      | Metadatas to be managed |
 | `networks`     | See [defaults](defaults/main.yml)  | `[]`      | Networks to be managed  |
+| `domains`      | See [defaults](defaults/main.yml)  | `[]`      | Domains to be managed   |
 
 
 ## License

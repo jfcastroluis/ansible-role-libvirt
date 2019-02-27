@@ -1,0 +1,59 @@
+<domain type='kvm'>
+  <name>{{ item.name }}</name>
+  <memory unit='GiB'>{{ item.memory }}</memory>
+  <vcpu>{{ item.vcpus }}</vcpu>
+  <os>
+    <type arch='x86_64' machine='pc-i440fx-bionic'>hvm</type>
+    <boot dev='hd'/>
+  </os>
+  <features>
+    <acpi/>
+    <apic/>
+  </features>
+  <clock offset='utc'>
+    <timer name='rtc' tickpolicy='catchup'/>
+    <timer name='pit' tickpolicy='delay'/>
+    <timer name='hpet' present='no'/>
+  </clock>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>destroy</on_crash>
+  <devices>
+    <emulator>/usr/bin/kvm-spice</emulator>
+{% for disk in item.disks %}
+    <disk type='file' device='{{ disk.device|default("disk") }}'>
+{% if disk.driver is defined %}
+      <driver name='qemu' type='{{ disk.driver.type|default("qcow2") }}'/>
+{% else %}
+      <driver name='qemu' type='qcow2'/>
+{% endif %}
+      <source file='{{ disk.source.file }}'/>
+      <target dev='{{ disk.target.device }}' bus='{{ disk.target.bus|default("virtio") }}'/>
+    </disk>
+{% endfor %}
+{% for interface in item.interfaces %}
+    <interface type='network'>
+      <model type='virtio'/>
+      <source network='{{ interface.network }}'/>
+{% if interface.mac is defined %}
+      <mac address='{{ interface.mac }}'/>
+{% endif %}
+    </interface>
+{% endfor %}
+    <video>
+      <model type='qxl' ram='65536' vram='65536' vgamem='16384' heads='1' primary='yes'/>
+    </video>
+    <serial type='pty'>
+      <target type='isa-serial' port='0'>
+        <model name='isa-serial'/>
+      </target>
+    </serial>
+    <channel type='spicevmc'>
+      <target type='virtio' name='com.redhat.spice.0'/>
+    </channel>
+    <graphics type='spice' autoport='yes' listen='127.0.0.1'>
+      <listen type='address' address='127.0.0.1'/>
+      <image compression='off'/>
+    </graphics>
+  </devices>
+</domain>

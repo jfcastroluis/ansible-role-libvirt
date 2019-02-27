@@ -1,0 +1,8 @@
+---
+- name: domains - present (define)
+  virt:
+    name: "{{ item.name }}"
+    command: define
+    xml: "{{ lookup('template', 'libvirt_domain.xml.j2') }}"
+  when: item.state|default("present") == "present"
+  loop: "{{ libvirt__domains }}"

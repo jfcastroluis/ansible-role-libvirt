@@ -64,3 +64,24 @@ libvirt__networks: []
   #   state: ("present" | "absent")  # metadata state:
                                      #   - "present" (default): define, active y autostart the network
                                      #   - "absent": inactive and undefine the network
+
+
+libvirt__domains: []
+  # - name: "string"
+  #   vcpus: "integer"  # Number of vCPUs
+  #   memory: "integer" # RAM in GBs
+  #   disks:                # (optional)
+  #     - name: "string"    # 
+  #       device: "string"  # (default: "disk") Other possible value might be "cdrom"
+  #       driver:           # (optional)
+  #         type: "string"  # (default: "qcow2") Other possible value might be "raw"
+  #       source:           # 
+  #         file: "string"  # path to disk volume
+  #       target:
+  #         device: "string"   # target device name (e.g. "vda" or "hda")
+  #         bus: "string"      # (default: "virtio") Other possible value might be "ide"
+  #   interfaces:            # (optional)
+  #     - network: "string"  # network linked to interface
+  #       mac: "string"      # MAC address for interface
+  #   state: ("present")  # domain state:
+                          #   - "present" (default): define (but not active nor autostart) the domain
