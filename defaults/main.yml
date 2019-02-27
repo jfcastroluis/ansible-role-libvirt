@@ -51,3 +51,16 @@ libvirt__metadatas: []
   #   state: ("present" | "absent") # metadata state:
                                     #   - "present" (default): create metadata file
                                     #   - "absent": delete metadata file
+
+
+libvirt__networks: []
+  # - name: "string"
+  #   mode: ("isolated" | "nat")  # (default: "isolated") Network mode
+  #   address:
+  #     ip: "string"       # IP address for host
+  #     netmask: "string"  # (default: "255.255.255.0") Netmask for host
+  #     mac: "string"      # (optional) MAC address for host
+  #     bridge: "string"   # (optional) Bridge name for network
+  #   state: ("present" | "absent")  # metadata state:
+                                     #   - "present" (default): define, active y autostart the network
+                                     #   - "absent": inactive and undefine the network

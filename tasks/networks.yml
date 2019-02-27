@@ -1,0 +1,40 @@
+---
+- name: networks - present (define)
+  virt_net:
+    name: "{{ item.name }}"
+    command: define
+    xml: "{{ lookup('template', 'libvirt_network.xml.j2') }}"
+  when: item.state|default("present") == "present"
+  loop: "{{ libvirt__networks }}"
+
+
+- name: networks - present (active)
+  virt_net:
+    name: "{{ item.name }}"
+    state: active
+  when: item.state|default("present") == "present"
+  loop: "{{ libvirt__networks }}"
+
+
+- name: networks - present (autostart)
+  virt_net:
+    name: "{{ item.name }}"
+    autostart: yes
+  when: item.state|default("present") == "present"
+  loop: "{{ libvirt__networks }}"
+
+
+- name: networks - absent (inactive)
+  virt_net:
+    name: "{{ item.name }}"
+    state: inactive
+  when: item.state|default("present") == "absent"
+  loop: "{{ libvirt__networks }}"
+
+
+- name: networks - absent (undefine)
+  virt_net:
+    name: "{{ item.name }}"
+    state: absent
+  when: item.state|default("present") == "absent"
+  loop: "{{ libvirt__networks }}"

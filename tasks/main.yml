@@ -16,3 +16,6 @@
 
 - import_tasks: metadatas.yml
   tags: "libvirt-metadatas"
+
+- import_tasks: networks.yml
+  tags: "libvirt-networks"
