@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## Unreleased
+### Added
+- Little changes on taks to be consistent
+
+### Fixed
+- Pools task: item state fixed
+
+
 ## 2.0.0
 ### Added
 - Domains management

@@ -2,3 +2,5 @@
 - name: dependencies
   apt:
     name: "{{ libvirt__dependencies }}"
+    state: present
+    update_cache: yes

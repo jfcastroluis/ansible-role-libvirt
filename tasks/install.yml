@@ -3,3 +3,4 @@
   apt:
     name: "{{ libvirt__packages }}"
     state: present
+    update_cache: yes

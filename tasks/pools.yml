@@ -15,7 +15,7 @@
     name: "{{ item.item.name }}"
     command: build
     mode: new
-  when: item.state|default("present") == "present" and
+  when: item.item.state|default("present") == "present" and
         item.changed
   loop: "{{ libvirt__pools_define.results }}"
 
